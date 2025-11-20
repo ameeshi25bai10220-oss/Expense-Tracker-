@@ -3,16 +3,16 @@ from typing import List, Optional, Any
 from data_model import Expense, DB_FILE, CATEGORIES, green, red, yellow
 
 def db_execute(query: str, params: tuple = ()) -> Optional[List[Expense]]:
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    try:
+    conn = sqlite3.connect(DB_FILE)  #connects object to database file
+    cursor = conn.cursor()  
+    try:   #to ensure that the database connection is closed
         cursor.execute(query, params)
         if query.strip().upper().startswith('SELECT'):
             expenses = []
-            for row in cursor.fetchall():
+            for row in cursor.fetchall():  #data fetching
                 expenses.append(Expense(id=row[0], name=row[1], amount=row[2], category=row[3], date=row[4]))
             return expenses
-        conn.commit()
+        conn.commit()  #if any changes were made, this line saves them
         return None
     except sqlite3.Error as e:
         print(f"{red('DB Error:')} {e}")
@@ -24,7 +24,7 @@ def get_all_expenses() -> List[Expense]:
     return db_execute("SELECT id, name, amount, category, date FROM expenses ORDER BY date DESC") or []
 
 def add_expense(expense: Expense):
-    query = "INSERT INTO expenses (name, amount, category, date) VALUES (?, ?, ?, ?)"
+    query = "INSERT INTO expenses (name, amount, category, date) VALUES (?, ?, ?, ?)"  #builds an insert query with placeholders "?"
     params = (expense.name, expense.amount, expense.category, expense.date)
     db_execute(query, params)
     print(f"{green('✅ SUCCESS:')} Added {expense.category} expense: {expense.name} (Rs.{expense.amount:.2f}).")
@@ -42,7 +42,7 @@ def get_user_expense_details():
     while True:
         print("\nSelect a category:")
         for i, category_name in enumerate(CATEGORIES):
-            print(f"  {i + 1}. {category_name}")
+            print(f"  {i + 1}. {category_name}") #so that the numbering starts from 1 instead of 0
         try:
             selected_index = int(input(f"Enter category number [1 - {len(CATEGORIES)}]: ")) - 1
             if 0 <= selected_index < len(CATEGORIES):
@@ -62,7 +62,7 @@ def get_user_expense_details():
         date=expense_date
     )
 
-def delete_expense(expense_id: int):
+def delete_expense(expense_id: int):  #targets the row of the given id
     query = "DELETE FROM expenses WHERE id = ?"
     db_execute(query, (expense_id,))
     print(f"{green('✅ SUCCESS:')} Deleted expense ID {expense_id}.")

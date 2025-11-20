@@ -1,9 +1,9 @@
 import datetime
 from typing import Dict, Any, List
-from data_model import Expense, BUDGET, green, red, yellow
+from data_model import Expense, BUDGET, green, red, yellow  #Imports the BUDGET value and the color functions
 
 def display_report(summary: Dict[str, Any]):
-    total_spent = summary['total_spent']
+    total_spent = summary['total_spent']  #Pulls the necessary key values (total spent, remaining budget, daily budget, remaining days) out of the input summary dictionary
     remaining_budget = summary['remaining_budget']
     daily_budget = summary['daily_budget']
     remaining_days = summary['remaining_days']
@@ -40,16 +40,17 @@ def display_analytics(summary: Dict[str, Any]):
     if not category_totals:
         print("No expenses recorded yet.")
         return
-
+        
+#Takes the category totals and sorts them from largest spending amount to smallest (descending order).
     sorted_categories = sorted(category_totals.items(), key=lambda item: item[1], reverse=True)
 
     for category, amount in sorted_categories:
         percentage = (amount / total_spent) * 100 if total_spent > 0 else 0
         bar_length = int(percentage // 5)
-        bar = "█" * bar_length
+        bar = "█" * bar_length  #each block █ represents 5% of the total spent
         print(f"  {category:<10} | Rs.{amount:7.2f} ({percentage:4.1f}%) {yellow(bar)}")
         
 def generate_monthly_report(expenses: List[Expense], summary: Dict[str, Any]):
-    display_report(summary)
+    display_report(summary)  #Simply calls the two main display functions in sequence to build the final report shown to the user.
     print("\n" + "-"*40)
     display_analytics(summary)

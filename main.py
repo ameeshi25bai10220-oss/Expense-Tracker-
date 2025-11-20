@@ -6,7 +6,7 @@ import module3_reporting as m3
 
 def print_main_menu():
     print(green("💸 EXPENSE TRACKER - MAIN MENU"))
-    print("-" * 40)
+    print("-" * 40)  #to make it look clean
     print("1. Add New Expense")
     print("2. View Summary & Analytics")
     print("3. Manage/Edit/Delete Expenses")

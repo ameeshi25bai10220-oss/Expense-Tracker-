@@ -2,9 +2,7 @@
 
 ## 1. Problem Statement
 
-The primary challenge addressed by this project is financial unawareness and budget overshoot due to poor tracking. 
-Individuals often struggle to maintain a clear, real-time understanding of their monthly financial status, relying on historical data rather than proactive guidance. 
-Existing solutions are often cumbersome or overly complex. The core need is for a simple, actionable, and predictive budgeting tool that provides immediate feedback and actionable metrics to prevent budget failure.
+Financial ignorance and budget overruns brought on by inadequate tracking are the main issues this project attempts to address. People frequently find it difficult to keep track of their monthly financial situation in real time, depending more on past information than on proactive advice. Current solutions are frequently too complicated or time-consuming. In order to avoid budget failure, there is a fundamental need for a straightforward, practical, and predictive budgeting tool that offers quick feedback and useful metrics.
 
 ## 2. Scope of the Project
 
